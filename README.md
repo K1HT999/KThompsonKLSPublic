@@ -16,5 +16,5 @@ p-value: 0.0287
 I am not publishing the exact contract universe, city, price bands, filters, thresholds, or live rule because those are the parts most likely to decay.
 
 **Author:** K. Thompson  
-**Research brand:** ThomPlatz Research  
+**Research Platform:** ThomPlatz Research  
 **Contact:** thomplatzRSCH@gmail.com 
