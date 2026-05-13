@@ -1,0 +1,118 @@
+# Finding a Weather Longshot Mispricing on Kalshi
+
+Over the past several weeks, I researched whether alternative weather data could help price Kalshi temperature longshots more accurately than the market.
+
+The original idea was simple: use high-frequency weather data to identify extreme temperature contracts where the market was overpricing the probability of a tail outcome. In those cases, the attractive side would be NO: collect small wins repeatedly while avoiding the rare event that can wipe out many trades.
+
+That kind of strategy is dangerous if the model underestimates tail risk. So the real question was not “can I find a high win rate?” It was:
+
+> Can I identify longshot contracts where the market-implied probability is consistently higher than the realized risk, after executable pricing and fees?
+The final result was not exactly what I expected. The broad alternative-data model was only marginally useful after cleanup. But the process uncovered something narrower and more interesting: a specific subset of temperature longshot contracts appeared to show persistent YES-side overpricing, making the NO side historically attractive.
+
+I am not publishing the exact contract universe, city, price bands, filters, or live rule because those are the parts most likely to decay. But the research process and high-level result are worth sharing.
+
+## Why Weather Markets?
+
+Prediction markets are supposed to aggregate information into prices. Weather markets are especially interesting because the outcome is physical, measurable, and externally settled. Unlike politics or sports, there is no narrative ambiguity. The temperature either hits the threshold or it does not. That makes weather a strong candidate for alternative-data research, especially around tails.
+
+## Data Used
+
+The research used three broad data categories:
+
+| Data Source | Purpose |
+|---|---|
+| Kalshi market data | Contract prices, orderbook information, metadata, settlements |
+| HRRR weather model data | Short-horizon numerical weather forecasts |
+| ASOS station observations | Intraday observed temperature progression |
+
+The intended workflow was:
+
+1. Estimate the expected temperature path into settlement.
+2. Estimate the probability that a longshot threshold is hit.
+3. Compare that probability to the market-implied probability.
+4. Buy NO only when the executable expected value remained positive after fees.
+
+## What Went Wrong First
+
+The first version looked far too good. That is usually a warning sign. After reviewing the pipeline, I found several issues that needed to be corrected before trusting the result:
+
+- Some historical PnL estimates were not based on executable NO-side prices.
+- Fees were not being applied consistently.
+- Some weather-derived fields were stale due to enrichment-order issues.
+- Some trades were referencing the wrong contract horizon.
+- The model was making the sample look cleaner than the real tradable universe.
+
+After those fixes, the broad weather model became much less impressive. That was disappointing, but useful. It pushed the research away from an inflated backtest and toward a narrower, cleaner anomaly.
+
+## The Discovery
+
+Once the pipeline was corrected, the strongest result was not a universal HRRR/ASOS signal. The strongest result was a narrower pricing anomaly inside a specific class of temperature longshots.
+
+In plain English:
+
+> The market appeared to be overpaying for a certain type of extreme temperature outcome. Buying NO against that longshot was historically profitable.
+
+This is exactly the kind of behavior that can appear in prediction markets. Cheap YES contracts feel convex. They are fun to buy. They look like lottery tickets. But if the true probability is lower than the market price, the other side can become attractive.
+
+## Corrected Backtest Results
+
+After applying executable pricing and fees, the corrected eligible set showed:
+
+| Metric | Result |
+|---|---:|
+| Trades | 307 |
+| Wins | 300 |
+| Misses | 7 |
+| Win rate | 97.7% |
+| Total PnL | +692.4 cents per one-contract basket |
+
+These figures are shown on a one-contract basis. Position sizing is a separate problem, especially for negatively skewed strategies.
+
+## Statistical Check
+
+The observed miss count was compared against the miss count implied by each contract’s break-even probability.
+
+| Metric | Result |
+|---|---:|
+| Observed misses | 7 |
+| Expected misses at break-even | 13.9 |
+| p-value | 0.0287 |
+
+This does not prove the edge will persist. It does suggest that the observed result was not merely a random lucky streak under the tested assumptions.
+
+## What I Am Not Publishing
+
+I am intentionally not publishing:
+
+- the city or location subset,
+- the exact contract family,
+- the entry price ranges,
+- the filters,
+- the score thresholds,
+- the time-to-resolution window,
+- the exact live-trading rule.
+
+The edge is specific enough that publishing the full rule would likely degrade it.
+
+If you are interested in collaborating or discussing the research, reach out at thomplatzresearch@gmail.com.
+
+## Conclusion
+
+The biggest lesson was that alternative data is not always alpha-additive in the way you expect.
+
+I started by trying to build a broad HRRR/ASOS-driven model for temperature tails. After correcting the pipeline, that broad model was less powerful than expected. But the research process uncovered a more specific market anomaly: a subset of Kalshi temperature longshot NO contracts that showed persistent historical profitability, a high win rate, and favorable miss behavior versus break-even expectations.
+
+The public conclusion is simple:
+
+> In a corrected historical backtest, a specific subset of Kalshi temperature longshot NO contracts showed persistent profitability after executable pricing and fees.
+
+The private conclusion is more specific. That is what I will continue tracking live.
+
+## Sources
+
+- NOAA HRRR documentation: https://rapidrefresh.noaa.gov/hrrr/
+- Iowa Environmental Mesonet ASOS archive: https://www.mesonet.agron.iastate.edu/request/download.phtml?network=IO__ASOS
+- Iowa Environmental Mesonet ASOS request documentation: https://mesonet.agron.iastate.edu/cgi-bin/request/asos1min.py?help=
+- Kalshi fee documentation: https://help.kalshi.com/en/articles/13823805-fees
+- Kalshi regulation documentation: https://help.kalshi.com/en/articles/13823765-how-is-kalshi-regulated
+- Kalshi API documentation: https://docs.kalshi.com/getting_started/api_environments
