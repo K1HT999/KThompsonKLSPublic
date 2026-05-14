@@ -17,4 +17,4 @@ I am not publishing the exact contract universe, city, price bands, filters, thr
 
 **Author:** K. Thompson  
 **Research Platform:** ThomPlatz Research  
-**Contact:** thomplatzRSCH@gmail.com 
+**Contact:** thomplatzresearch@gmail.com 
