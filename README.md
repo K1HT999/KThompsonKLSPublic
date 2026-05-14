@@ -1,4 +1,4 @@
-Kalshi weather-market strategy using alternative data.
+**Kalshi weather-market strategy NO Longshots.**
 
 The original goal was to use high-frequency weather data to price temperature longshots more accurately than the market.
 After correcting for executable pricing, fees, stale fields, and leakage, the broad model was less impressive than expected.
