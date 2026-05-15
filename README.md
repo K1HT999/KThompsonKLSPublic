@@ -5,15 +5,14 @@ After correcting for executable pricing, fees, stale fields, and leakage, the br
 But the process uncovered something more interesting: A specific subset of temperature longshot NO contracts showed persistent YES-side overpricing. 
 
 Backtest Results:
-307 trades
-300 wins
-7 misses
-97.7% win rate
-+692.4c per one-contract basket
-Observed misses: 7
-Break-even expected misses: 13.9
-p-value: 0.0287
-I am not publishing the exact contract universe, city, price bands, filters, thresholds, or live rule because those are the parts most likely to decay.
+1047 trades
+999 wins
+48 misses
+95.4% win rate
++258.8c per one-contract basket
+Break-even expected misses: 50.9
+p-value: 0.38
+I am not publishing the exact contract universe, city, price bands, filters, or thresholds.
 
 **Author:** K. Thompson  
 **Research Platform:** ThomPlatz Research  
