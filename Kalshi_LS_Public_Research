@@ -60,11 +60,11 @@ After applying executable pricing and fees, the corrected eligible set showed:
 
 | Metric | Result |
 |---|---:|
-| Trades | 307 |
-| Wins | 300 |
-| Misses | 7 |
-| Win rate | 97.7% |
-| Total PnL | +692.4 cents per one-contract basket |
+| Trades | 1047 |
+| Wins | 999 |
+| Misses | 48 |
+| Win rate | 95.4% |
+| Total PnL | +285.8 cents per one-contract basket |
 
 These figures are shown on a one-contract basis. Position sizing is a separate problem, especially for negatively skewed strategies.
 
@@ -74,9 +74,9 @@ The observed miss count was compared against the miss count implied by each cont
 
 | Metric | Result |
 |---|---:|
-| Observed misses | 7 |
-| Expected misses at break-even | 13.9 |
-| p-value | 0.0287 |
+| Observed misses | 48 |
+| Expected misses at break-even | 50.9 |
+| p-value | 0.3725 |
 
 This does not prove the edge will persist. It does suggest that the observed result was not merely a random lucky streak under the tested assumptions.
 
