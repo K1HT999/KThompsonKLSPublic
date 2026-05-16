@@ -2,12 +2,14 @@
 
 Over the past several weeks, I researched whether alternative weather data could help price Kalshi temperature longshots more accurately than the market.
 
-The original idea was simple: use high-frequency weather data to identify extreme temperature contracts where the market was overpricing the probability of a tail outcome. In those cases, the attractive side would be NO: collect small wins repeatedly while avoiding the rare event that can wipe out many trades.
+The original idea was to use high-frequency weather data to identify extreme temperature contracts where the market was overpricing the probability of a tail outcome. 
+In those cases, the tradeable side would be NO, and the strategy would collect small wins repeatedly while avoiding the rare event that can wipe out many trades.
 
-That kind of strategy is dangerous if the model underestimates tail risk. So the real question was not “can I find a high win rate?” It was:
-
+That kind of strategy is dangerous if the model underestimates tail risk.
 Can I identify longshot contracts where the market-implied probability is consistently higher than the realized risk after accounting for execution and fees?
-The final result was not exactly what I expected. The broad alternative data model was only marginally useful after cleanup. But the process uncovered something narrower and more interesting: a specific subset of temperature longshot contracts appeared to show persistent YES-side overpricing, making the NO side historically attractive.
+
+The final result was not exactly what I expected. The broad alternative data model was only marginally useful after cleanup. 
+But the process uncovered something narrower and more interesting: a specific subset of temperature longshot contracts appeared to show persistent YES-side overpricing, making the NO side historically attractive.
 
 I am not publishing the exact contract universe, city, price bands, filters, or live rule because those are the parts most likely to decay. But the research process and high-level result are worth sharing.
 
