@@ -4,7 +4,7 @@ The original goal was to use high-frequency weather data to price temperature lo
 After correcting for executable pricing, fees, stale fields, and leakage, the broad model was less impressive than expected.
 But the process uncovered something more interesting: A specific subset of temperature longshot NO contracts showed persistent YES-side overpricing. 
 
-Hard rule:
+Rule:
 ```text
 IF
 12h to resolution upper-tail high-temperature contract
