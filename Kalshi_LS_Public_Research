@@ -3,19 +3,18 @@
 Over the past several weeks, I researched whether alternative weather data could help price Kalshi temperature longshots more accurately than the market.
 
 The original idea was to use high-frequency weather data to identify extreme temperature contracts where the market was overpricing the probability of a tail outcome. 
-In those cases, the tradeable side would be NO, and the strategy would collect small wins repeatedly while avoiding the rare event that can wipe out many trades.
+In those cases, the tradeable side would be NO, and the strategy would collect small wins repeatedly while avoiding the rare event that would wipe out many trades, which is the primary risk in a strategy like this.
 
-That kind of strategy is dangerous if the model underestimates tail risk.
+So the research question became:
 Can I identify longshot contracts where the market-implied probability is consistently higher than the realized risk after accounting for execution and fees?
 
-The final result was not exactly what I expected. The broad alternative data model was only marginally useful after cleanup. 
+The resultant testing was not exactly what I expected. The broad alternative data model was only marginally useful after cleanup. 
 But the process uncovered something narrower and more interesting: a specific subset of temperature longshot contracts appeared to show persistent YES-side overpricing, making the NO side historically attractive.
-
-I am not publishing the exact contract universe, city, price bands, filters, or live rule because those are the parts most likely to decay. But the research process and high-level result are worth sharing.
 
 ## Why Weather Markets?
 
-Prediction markets are supposed to aggregate information into prices. Weather markets are especially interesting because the outcome is physical, measurable, and externally settled. Unlike politics or sports, there is no narrative ambiguity. The temperature either hits the threshold or it does not. That makes weather a strong candidate for alternative-data research, especially around tails.
+Prediction markets are supposed to aggregate information into prices. Weather markets are especially interesting because the outcome is physical, measurable, and externally settled. Unlike politics or sports, there is no narrative ambiguity. 
+The temperature either hits the threshold or it does not. That makes weather a strong candidate for alternative-data research, especially around tails.
 
 ## Data Used
 
@@ -32,7 +31,7 @@ The intended workflow was:
 1. Estimate the expected temperature path into settlement.
 2. Estimate the probability that a longshot threshold is hit.
 3. Compare that probability to the market-implied probability.
-4. Buy NO only when the executable expected value remained positive after fees.
+4. Buy NO only when the executable expected value remains positive AFTER fees.
 
 ## What Went Wrong First
 
@@ -46,19 +45,15 @@ The first version looked far too good. That is usually a warning sign. After rev
 
 After those fixes, the broad weather model became much less impressive. That was disappointing, but useful. It pushed the research away from an inflated backtest and toward a narrower, cleaner anomaly.
 
-## The Discovery
-
 Once the pipeline was corrected, the strongest result was not a universal HRRR/ASOS signal. The strongest result was a narrower pricing anomaly inside a specific class of temperature longshots.
 
-In plain English:
-
-The market appeared to be overpaying for a certain type of extreme temperature outcome. Buying NO against that long shot was historically profitable.
+In simpler terms, the market appeared to be overpaying for a certain type of extreme temperature outcome. Buying NO against that long shot was historically profitable.
 
 This is exactly the kind of behavior that can appear in prediction markets. Cheap YES contracts feel convex. They are fun to buy. They look like lottery tickets. But if the true probability is lower than the market price, the other side can become attractive.
 
-## Corrected Backtest Results
+## Backtest Results
 
-After applying executable pricing and fees, the corrected eligible set showed:
+After applying executable pricing and fees, the eligible set showed:
 
 | Metric | Result |
 |---|---:|
@@ -68,7 +63,8 @@ After applying executable pricing and fees, the corrected eligible set showed:
 | Win rate | 95.4% |
 | Total PnL | +285.8 cents per one-contract basket |
 
-These figures are shown on a one-contract basis. Position sizing is a separate problem, especially for negatively skewed strategies.
+These figures are shown on a one-contract basis. Position sizing is a separate problem, especially for negatively skewed strategies. 
+A fractional Kelly sizing or normalized-volatility surface sizing could be applied here.
 
 ## Statistical Check
 
@@ -100,15 +96,13 @@ If you are interested in collaborating or discussing the research, reach out at 
 
 ## Conclusion
 
-The biggest lesson was that alternative data is not always alpha-additive in the way you expect.
+The biggest lesson was that alternative data is NOT always alpha-additive. No dataset is inherently useful to a non-specific trading strategy.
 
-I started by trying to build a broad HRRR/ASOS-driven model for temperature tails. After correcting the pipeline, that broad model was less powerful than expected. But the research process uncovered a more specific market anomaly: a subset of Kalshi temperature longshot NO contracts that showed persistent historical profitability, a high win rate, and favorable miss behavior versus break-even expectations.
+I started by trying to build a broad HRRR/ASOS-driven model for temperature tails. After correcting the pipeline, that broad model was less powerful than expected.
+But the research process uncovered a more specific market anomaly: a subset of Kalshi temperature longshot NO contracts that showed persistent historical profitability.
 
-The public conclusion is simple:
-
-In a corrected historical backtest, a specific subset of Kalshi temperature longshot NO contracts showed persistent profitability after executable pricing and fees.
-
-The private conclusion is more specific. That is what I will continue tracking live.
+The private conclusion is more comprehensive and specific. That is what I will continue tracking live.
+If you are interested in collaborating or working together, please reach out at ThomPlatzResearch@gmail.com
 
 ## Sources
 
