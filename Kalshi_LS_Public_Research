@@ -13,13 +13,11 @@ But the process uncovered something narrower and more interesting: a specific su
 
 Trades were enetered according to the following rule:
 
-```text
 IF
 12h to resolution upper-tail high-temperature contract
 AND YES ask between 1c and 20c
 THEN
 Enter NO side
-```
 
 ## Why Weather Markets?
 
