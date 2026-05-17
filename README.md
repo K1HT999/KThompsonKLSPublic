@@ -21,7 +21,7 @@ Backtest Results:
 +258.8c per one-contract basket
 Break-even expected misses: 50.9
 p-value: 0.38
-I am not publishing the exact contract universe, city, price bands, filters, or thresholds.
+I am not publishing the exact contract universe or city.
 
 **Author:** K. Thompson  
 **Research Platform:** ThomPlatz Research  
