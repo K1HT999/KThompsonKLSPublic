@@ -78,20 +78,6 @@ The observed miss count was compared against the miss count implied by each cont
 
 This does not prove the edge will persist. It does suggest that the observed result was not merely a random lucky streak under the tested assumptions.
 
-## What I Am Not Publishing
-
-I am intentionally not publishing:
-
-- the city or location subset,
-- the exact contract family,
-- the entry price ranges,
-- the filters,
-- the score thresholds,
-- the time-to-resolution window,
-- the exact live-trading rule.
-
-The edge is specific enough that publishing the full rule would likely degrade it.
-
 If you are interested in collaborating or discussing the research, reach out at thomplatzresearch@gmail.com.
 
 ## Conclusion
