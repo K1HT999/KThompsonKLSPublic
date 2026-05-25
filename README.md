@@ -26,5 +26,4 @@ p-value: 0.38
 I am not publishing the exact contract universe or city.
 
 **Author:** K. Thompson  
-**Research Platform:** ThomPlatz Research  
 **Contact:** thomplatzresearch@gmail.com 
