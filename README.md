@@ -1,5 +1,7 @@
 **Kalshi weather-market strategy NO Longshots.**
 
+I researched whether alternative weather data could help price Kalshi temperature longshots more accurately than the market
+
 The original goal was to use high-frequency weather data to price temperature longshots more accurately than the market.
 After correcting for executable pricing, fees, stale fields, and leakage, the broad model was less impressive than expected.
 But the process uncovered something more interesting: A specific subset of temperature longshot NO contracts showed persistent YES-side overpricing. 
