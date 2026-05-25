@@ -5,7 +5,7 @@ Last updated: 05/19/26
 Market: Kalshi Daily High Contracts
 
 ##Introduction
-Over the past few weeks, I researched whether alternative weather data could help price Kalshi temperature longshots more accurately than the market.
+I researched whether alternative weather data could help price Kalshi temperature longshots more accurately than the market.
 
 The original idea was to use high-frequency weather data to identify extreme temperature contracts where the market was overpricing the probability of a tail outcome. 
 In those cases, the tradeable side would be NO, and the strategy would collect small wins repeatedly while avoiding the rare event that would wipe out many trades, which is the primary risk in a strategy like this.
